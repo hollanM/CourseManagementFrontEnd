@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
@@ -27,4 +27,16 @@ import HelloWorld from './components/HelloWorld.vue'
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
-</style>
+</style> -->
+<script setup>
+  import MenuBar from "./components/MenuBar.vue";
+</script>
+
+<template>
+  <v-app>
+    <MenuBar :key="$route.fullPath" />
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
+</template>
