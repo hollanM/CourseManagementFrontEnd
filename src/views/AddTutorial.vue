@@ -43,7 +43,7 @@ const cancel = () => {
   <div>
     <v-container>
       <v-toolbar>
-        <v-toolbar-title>Tutorial Add</v-toolbar-title>
+        <v-toolbar-title>Add Course</v-toolbar-title>
       </v-toolbar>
 
       <br />
@@ -60,7 +60,7 @@ const cancel = () => {
         <v-text-field
           v-model="tutorial.description"
           id="description"
-          :counter="50"
+          :counter="2000"
           label="Description"
           required
         ></v-text-field>
