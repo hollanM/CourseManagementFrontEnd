@@ -83,9 +83,12 @@ onMounted(() => {
         <v-table>
           <thead>
             <tr>
-              <th class="text-left">Title</th>
+              <th class="text-left">Dept</th>
+              <th class="text-left">Course Number</th>
+              <th class="text-left">Name</th>
+              <th class="text-left">Level</th>
+              <th class="text-left">Hour</th>
               <th class="text-left">Description</th>
-              <th class="text-left">Actions</th>
             </tr>
           </thead>
           <tbody>

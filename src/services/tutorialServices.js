@@ -25,4 +25,9 @@ export default {
   findByTitle(title) {
     return apiClient.get(`/tutorials?title=${title}`);
   },
+  
+  // New: generic search using ?q=term to match controller
+  findByQuery(q) {
+    return apiClient.get(`/tutorials?q=${encodeURIComponent(q)}`);
+  }
 };

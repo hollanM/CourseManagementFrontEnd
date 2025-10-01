@@ -25,7 +25,11 @@ const retrieveTutorial = async () => {
 
 const updateTutorial = async () => {
   const data = {
-    title: tutorial.value.title,
+    dept: tutorial.value.dept,
+    courseNo: tutorial.value.courseNo,
+    name: tutorial.value.name,
+    level: tutorial.value.level,
+    hour: tutorial.value.hour,
     description: tutorial.value.description,
   };
   try {
@@ -50,7 +54,7 @@ onMounted(() => {
   <div>
     <v-container>
       <v-toolbar>
-        <v-toolbar-title>Tutorial Edit</v-toolbar-title>
+        <v-toolbar-title>Course Edit</v-toolbar-title>
       </v-toolbar>
       <br />
       <h4>{{ message }}</h4>

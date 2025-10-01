@@ -2,7 +2,7 @@
 import ocLogo from "/oc-logo-white.png";
 import { ref, onMounted } from "vue";
 
-const title = ref("Tutorials");
+const title = ref("Courses");
 
 const name = ref("");
 const logoURL = ref("");
@@ -31,7 +31,7 @@ onMounted(() => {
       <v-spacer></v-spacer>
       <div >
         <v-btn class="mx-2" :to="{ name: 'tutorials' }"> List </v-btn>
-        <v-btn class="mx-2" :to="{ name: 'add' }"> Add Tutorial </v-btn>
+        <v-btn class="mx-2" :to="{ name: 'add' }"> Add Course </v-btn>
       </div>
 
     </v-app-bar>
