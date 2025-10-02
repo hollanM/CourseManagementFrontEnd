@@ -101,10 +101,12 @@ const cancel = () => {
 
         <v-btn
           :disabled="!valid"
-          color="success"
-          class="mr-4"
+          style="background-color: #43a047;"
+         
+          class="mr-4 text-white"
           @click="saveTutorial"
         >
+         <!-- color="success" -->
           Save
         </v-btn>
 
