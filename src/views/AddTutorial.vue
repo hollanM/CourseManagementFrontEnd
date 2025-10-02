@@ -6,24 +6,30 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const valid = ref(false);
 
-const tutorial = ref({
+const course = ref({
   id: null,
-  title: "",
+  dept: "",
+  courseNo: "",
+  name: "",
+  level: "",
+  hour: "",
   description: "",
-  published: false,
 });
 const message = ref("Enter data and click save");
 
 const saveTutorial = () => {
   const data = {
-    title: tutorial.value.title,
-    description: tutorial.value.description,
-    published: true,
+    dept: course.value.dept,
+    courseNo: course.value.courseNo,
+    name: course.value.name,
+    level: course.value.level,
+    hour: course.value.hour,
+    description: course.value.description,
   
   };
   TutorialServices.create(data)
     .then((response) => {
-      tutorial.value.id = response.data.id;
+      course.value.id = response.data.id;
       console.log("add " + response.data);
       router.push({ name: "tutorials" });
     })
@@ -51,14 +57,42 @@ const cancel = () => {
       <br />
       <v-form ref="form" v-model="valid">
         <v-text-field
-          v-model="tutorial.title"
-          id="title"
-          :counter="50"
-          label="Title"
+          v-model="course.dept"
+          id="dept"
+          :counter="6"
+          label="Department"
           required
         ></v-text-field>
         <v-text-field
-          v-model="tutorial.description"
+          v-model="course.courseNo"
+          id="courseNo"
+          :counter="10"
+          label="Course Number"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.name"
+          id="name"
+          :counter="100"
+          label="Name"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.level"
+          id="level"
+          :counter="2"
+          label="Level"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.hour"
+          id="hour"
+          :counter="2"
+          label="Hour"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.description"
           id="description"
           :counter="2000"
           label="Description"

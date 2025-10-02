@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const valid = ref(false);
-const tutorial = ref({});
+const course = ref({});
 const message = ref("Enter data and click save");
 
 const props = defineProps({
@@ -17,7 +17,7 @@ const props = defineProps({
 const retrieveTutorial = async () => {
   try {
     const response = await TutorialServices.get(props.id);
-    tutorial.value = response.data;
+    course.value = response.data;
   } catch (e) {
     message.value = e.response.data.message;
   }
@@ -25,16 +25,16 @@ const retrieveTutorial = async () => {
 
 const updateTutorial = async () => {
   const data = {
-    dept: tutorial.value.dept,
-    courseNo: tutorial.value.courseNo,
-    name: tutorial.value.name,
-    level: tutorial.value.level,
-    hour: tutorial.value.hour,
-    description: tutorial.value.description,
+    dept: course.value.dept,
+    courseNo: course.value.courseNo,
+    name: course.value.name,
+    level: course.value.level,
+    hour: course.value.hour,
+    description: course.value.description,
   };
   try {
     const response = await TutorialServices.update(props.id, data);
-    tutorial.value.id = response.data.id;
+    course.value.id = response.data.id;
     router.push({ name: "tutorials" });
   } catch (e) {
     message.value = e.response.data.message;
@@ -54,23 +54,51 @@ onMounted(() => {
   <div>
     <v-container>
       <v-toolbar>
-        <v-toolbar-title>Course Edit</v-toolbar-title>
+        <v-toolbar-title>Tutorial Edit</v-toolbar-title>
       </v-toolbar>
       <br />
       <h4>{{ message }}</h4>
       <br />
       <v-form ref="form" v-model="valid" lazy validation>
         <v-text-field
-          v-model="tutorial.title"
-          id="title"
-          :counter="50"
-          label="Title"
+          v-model="course.dept"
+          id="dept"
+          :counter="6"
+          label="Department"
           required
         ></v-text-field>
         <v-text-field
-          v-model="tutorial.description"
+          v-model="course.courseNo"
+          id="courseNo"
+          :counter="10"
+          label="Course Number"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.name"
+          id="name"
+          :counter="100"
+          label="Name"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.level"
+          id="level"
+          :counter="2"
+          label="Level"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.hour"
+          id="hour"
+          :counter="2"
+          label="Hour"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="course.description"
           id="description"
-          :counter="50"
+          :counter="2000"
           label="Description"
           required
         ></v-text-field>
