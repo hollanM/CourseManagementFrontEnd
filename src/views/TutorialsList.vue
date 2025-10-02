@@ -1,20 +1,47 @@
 <script setup>
 import TutorialServices from "../services/tutorialServices";
 import { ref } from "vue";
+import { computed, watch } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const tutorials = ref([]);
+const courses = ref([]);
+
+const search = ref("");
+const page = ref(1);
+const itemsPerPage = ref(10);
+
+const filteredCourses = computed(() => {
+  const query = search.value.toLowerCase();
+  return courses.value.filter((item) =>
+    item.dept.toLowerCase().includes(query) ||
+    item.name.toLowerCase().includes(query)
+  );
+});
+
+
+const paginatedCourses = computed(() => {
+  const start = (page.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return filteredCourses.value.slice(start, end);
+});
+
+
+watch(search, () => {
+  page.value = 1;
+});
+
 
 const message = ref("Search, Add, Edit or Delete Courses");
+
 
 const editTutorial = (tutorial) => {
   router.push({ name: "edit", params: { id: tutorial.id } });
 };
 
-const viewTutorial = (tutorial) => {
-  router.push({ name: "view", params: { id: tutorial.id } });
-};
+// const viewTutorial = (tutorial) => {
+//   router.push({ name: "view", params: { id: tutorial.id } });
+// };
 
 const deleteTutorial = (tutorial) => {
   TutorialServices.delete(tutorial.id)
@@ -29,7 +56,7 @@ const deleteTutorial = (tutorial) => {
 const retrieveTutorials = () => {
   TutorialServices.getAll()
     .then((response) => {
-      tutorials.value = response.data;
+      courses.value = response.data;
     })
     .catch((e) => {
       message.value = e.response.data.message;
@@ -42,17 +69,18 @@ retrieveTutorials();
 <template>
   <div>
     <v-container>
-
+      <v-text-field v-model="search"label="Search by Department or Course Name" prepend-icon="mdi-magnify" class="mb-4"/>
       <br /><br />
       <v-card>
-        <v-card-title> Courses </v-card-title>
+        <v-card-title> Course Catalogue </v-card-title>
         <v-card-text>
           <b>{{ message }}</b>
         </v-card-text>
         <v-table>
           <thead>
             <tr>
-              <th class="text-left">Dept</th>
+              <th class="text-left">Add to My Courses</th>
+              <th class="text-left">Department</th>
               <th class="text-left">Course Number</th>
               <th class="text-left">Name</th>
               <th class="text-left">Level</th>
@@ -61,7 +89,11 @@ retrieveTutorials();
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in tutorials" :key="item.id">
+            <tr v-for="(item, index) in paginatedCourses" :key="item.id">
+              <td>
+                <v-btn class="mx-2" >Add</v-btn>
+                <!-- <v-btn class="mx-2" :to="{ name: 'add' }">Add</v-btn> -->
+              </td>
               <td>{{ item.dept }}</td>
               <td>{{ item.courseNo }}</td>
               <td>{{ item.name }}</td>
@@ -69,19 +101,19 @@ retrieveTutorials();
               <td>{{ item.hour }}</td>
               <td>{{ item.description }}</td>
               <td>
-                <v-icon small class="mx-4" @click="editTutorial(item)">
-                  mdi-pencil
-                </v-icon>
-                <v-icon small class="mx-4" @click="viewTutorial(item)">
-                  mdi-format-list-bulleted-type
-                </v-icon>
-                <v-icon small class="mx-4" @click="deleteTutorial(item)">
-                  mdi-trash-can
-                </v-icon>
+                <div style="display: flex; align-items: center;">
+                  <v-icon small class="mx-4" @click="editTutorial(item)">
+                    mdi-pencil
+                  </v-icon>
+                  <v-icon small class="mx-4" @click="deleteTutorial(item)">
+                    mdi-trash-can
+                  </v-icon>
+                </div>
               </td>
             </tr>
           </tbody>
-        </v-table>
+        </v-table> 
+        <v-pagination v-model="page":length="Math.ceil(filteredCourses.length / itemsPerPage)"class="mt-4"/>
       </v-card>
     </v-container>
   </div>
