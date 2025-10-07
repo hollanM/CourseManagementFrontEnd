@@ -5,13 +5,19 @@ import AddTutorial from "./views/AddTutorial.vue";
 import ViewTutorial from "./views/ViewTutorial.vue";
 import AddLesson from "./views/AddLesson.vue";
 import EditLesson from "./views/EditLesson.vue";
+import HomeView from "./views/HomeView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-
+    
     {
       path: "/",
+      name: "home",
+      component: HomeView,
+    },
+    {
+      path: "/courselist",
       name: "tutorials",
       component: TutorialsList,
     },

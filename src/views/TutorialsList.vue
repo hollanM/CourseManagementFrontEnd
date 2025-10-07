@@ -63,6 +63,14 @@ const retrieveTutorials = () => {
     });
 };
 
+const addToHome = (item) => {
+  TutorialServices.get(item.id)
+    return courses.value.filter((item) =>
+      item.dept,
+      item.name
+  );
+};
+
 retrieveTutorials();
 </script>
 
@@ -91,7 +99,8 @@ retrieveTutorials();
           <tbody>
             <tr v-for="(item, index) in paginatedCourses" :key="item.id">
               <td>
-                <v-btn class="mx-2" >Add</v-btn>
+                <v-btn @click="addToHome()" class="mx-2">Add</v-btn>
+
                 <!-- <v-btn class="mx-2" :to="{ name: 'add' }">Add</v-btn> -->
               </td>
               <td>{{ item.dept }}</td>
