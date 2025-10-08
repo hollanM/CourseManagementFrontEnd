@@ -2,7 +2,7 @@
 import ocLogo from "/ocLogoWhiteText.png";
 import { ref, onMounted } from "vue";
 
-const title = ref("Courses");
+
 
 const name = ref("");
 const logoURL = ref("");
@@ -16,7 +16,7 @@ onMounted(() => {
 <template>
   <div>
     <v-app-bar app style="background-color: #7A0019;">
-      <router-link :to="{ name: 'courses' }">
+      <router-link :to="{ name: 'home' }">
         <v-img
           class="mx-2"
           :src="logoURL"
