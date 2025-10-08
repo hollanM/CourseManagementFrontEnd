@@ -1,5 +1,5 @@
 <script setup>
-import TutorialServices from "../services/tutorialServices";
+import CourseServices from "../services/courseServices";
 import { ref } from "vue";
 import { computed, watch } from "vue";
 import { useRouter } from "vue-router";
@@ -35,26 +35,26 @@ watch(search, () => {
 const message = ref("Search, Add, Edit or Delete Courses");
 
 
-const editTutorial = (tutorial) => {
-  router.push({ name: "edit", params: { id: tutorial.id } });
+const editCourse = (course) => {
+  router.push({ name: "edit", params: { id: course.id } });
 };
 
-// const viewTutorial = (tutorial) => {
-//   router.push({ name: "view", params: { id: tutorial.id } });
+// const viewCourse = (course) => {
+//   router.push({ name: "view", params: { id: course.id } });
 // };
 
-const deleteTutorial = (tutorial) => {
-  TutorialServices.delete(tutorial.id)
+const deleteCourse = (course) => {
+  CourseServices.delete(course.id)
     .then(() => {
-      retrieveTutorials();
+      retrieveCourses();
     })
     .catch((e) => {
       message.value = e.response.data.message;
     });
 };
 
-const retrieveTutorials = () => {
-  TutorialServices.getAll()
+const retrieveCourses = () => {
+  CourseServices.getAll()
     .then((response) => {
       courses.value = response.data;
     })
@@ -71,7 +71,7 @@ const addToHome = (item) => {
   );
 };
 
-retrieveTutorials();
+retrieveCourses();
 </script>
 
 <template>
@@ -111,10 +111,10 @@ retrieveTutorials();
               <td>{{ item.description }}</td>
               <td>
                 <div style="display: flex; align-items: center;">
-                  <v-icon small class="mx-4" @click="editTutorial(item)">
+                  <v-icon small class="mx-4" @click="editCourse(item)">
                     mdi-pencil
                   </v-icon>
-                  <v-icon small class="mx-4" @click="deleteTutorial(item)">
+                  <v-icon small class="mx-4" @click="deleteCourse(item)">
                     mdi-trash-can
                   </v-icon>
                 </div>

@@ -30,7 +30,7 @@ onMounted(() => {
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div >
-        <v-btn class="mx-2 text-white" :to="{ name: 'tutorials' }"> List </v-btn>
+        <v-btn class="mx-2 text-white" :to="{ name: 'courses' }"> List </v-btn>
         <v-btn class="mx-2 text-white" :to="{ name: 'add' }"> Add Course </v-btn>
       </div>
 

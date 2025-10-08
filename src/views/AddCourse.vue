@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import TutorialServices from "../services/tutorialServices";
+import CourseServices from "../services/courseServices";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -17,7 +17,7 @@ const course = ref({
 });
 const message = ref("Enter data and click save");
 
-const saveTutorial = () => {
+const saveCourse = () => {
   const data = {
     dept: course.value.dept,
     courseNo: course.value.courseNo,
@@ -27,11 +27,11 @@ const saveTutorial = () => {
     description: course.value.description,
   
   };
-  TutorialServices.create(data)
+  CourseServices.create(data)
     .then((response) => {
       course.value.id = response.data.id;
       console.log("add " + response.data);
-      router.push({ name: "tutorials" });
+      router.push({ name: "courses" });
     })
     .catch((e) => {
       message.value = e.response.data.message;
@@ -39,7 +39,7 @@ const saveTutorial = () => {
 };
 
 const cancel = () => {
-  router.push({ name: "tutorials" });
+  router.push({ name: "courses" });
 };
 
 
@@ -104,7 +104,7 @@ const cancel = () => {
           style="background-color: #43a047;"
          
           class="mr-4 text-white"
-          @click="saveTutorial"
+          @click="saveCourse"
         >
          <!-- color="success" -->
           Save
