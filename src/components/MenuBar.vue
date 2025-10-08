@@ -16,7 +16,7 @@ onMounted(() => {
 <template>
   <div>
     <v-app-bar app style="background-color: #7A0019;">
-      <router-link :to="{ name: 'tutorials' }">
+      <router-link :to="{ name: 'courses' }">
         <v-img
           class="mx-2"
           :src="logoURL"
@@ -30,7 +30,7 @@ onMounted(() => {
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div >
-        <v-btn class="mx-2 text-white" :to="{ name: 'tutorials' }"> List </v-btn>
+        <v-btn class="mx-2 text-white" :to="{ name: 'courses' }"> List </v-btn>
         <v-btn class="mx-2 text-white" :to="{ name: 'add' }"> Add Course </v-btn>
       </div>
 

@@ -1,11 +1,11 @@
 <script setup>
-import TutorialServices from "../services/tutorialServices";
+import CourseServices from "../services/courseServices";
 import LessonServices from "../services/lessonServices";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const tutorial = ref({});
+const course = ref({});
 const lessons = ref([]);
 const message = ref("Add, Edit or Delete Lessons");
 
@@ -16,9 +16,9 @@ const props = defineProps({
 });
 
 const retrieveLessons = () => {
-  TutorialServices.get(props.id)
+  CourseServices.get(props.id)
     .then((response) => {
-      tutorial.value = response.data;
+      course.value = response.data;
       LessonServices.getAllLessons(props.id)
         .then((response) => {
           lessons.value = response.data;
@@ -32,23 +32,23 @@ const retrieveLessons = () => {
     });
 };
 
-const editTutorial = () => {
+const editCourse = () => {
   router.push({ name: "edit", params: { id: props.id } });
 };
 
 const editLesson = (lesson) => {
   router.push({
     name: "editLesson",
-    params: { tutorialId: props.id, lessonId: lesson.id },
+    params: { courseId: props.id, lessonId: lesson.id },
   });
 };
 
 const addLesson = () => {
-  router.push({ name: "addLesson", params: { tutorialId: props.id } });
+  router.push({ name: "addLesson", params: { courseId: props.id } });
 };
 
 const deleteLesson = (lesson) => {
-  LessonServices.deleteLesson(lesson.tutorialId, lesson.id)
+  LessonServices.deleteLesson(lesson.courseId, lesson.id)
     .then(() => {
       retrieveLessons();
     })
@@ -66,13 +66,13 @@ onMounted(() => {
   <div>
     <v-container>
       <v-toolbar>
-        <v-toolbar-title>Tutorial View</v-toolbar-title>
+        <v-toolbar-title>Course View</v-toolbar-title>
       </v-toolbar>
       <br />
       <v-card>
         <v-card-title>
-          {{ tutorial.title }}
-          <v-btn class="mx-2" color="primary" @click="editTutorial">Edit</v-btn>
+          {{ course.title }}
+          <v-btn class="mx-2" color="primary" @click="editCourse">Edit</v-btn>
           <v-btn class="mx-2" color="success" @click="addLesson"
             >Add Lesson</v-btn
           >

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import TutorialServices from "../services/tutorialServices";
+import CourseServices from "../services/courseServices";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -14,16 +14,16 @@ const props = defineProps({
   },
 });
 
-const retrieveTutorial = async () => {
+const retrieveCourse = async () => {
   try {
-    const response = await TutorialServices.get(props.id);
+    const response = await CourseServices.get(props.id);
     course.value = response.data;
   } catch (e) {
     message.value = e.response.data.message;
   }
 };
 
-const updateTutorial = async () => {
+const updateCourse = async () => {
   const data = {
     dept: course.value.dept,
     courseNo: course.value.courseNo,
@@ -33,20 +33,20 @@ const updateTutorial = async () => {
     description: course.value.description,
   };
   try {
-    const response = await TutorialServices.update(props.id, data);
+    const response = await CourseServices.update(props.id, data);
     course.value.id = response.data.id;
-    router.push({ name: "tutorials" });
+    router.push({ name: "courses" });
   } catch (e) {
     message.value = e.response.data.message;
   }
 };
 
 const cancel = () => {
-  router.push({ name: "tutorials" });
+  router.push({ name: "courses" });
 };
 
 onMounted(() => {
-  retrieveTutorial();
+  retrieveCourse();
 });
 </script>
 
@@ -54,7 +54,7 @@ onMounted(() => {
   <div>
     <v-container>
       <v-toolbar>
-        <v-toolbar-title>Tutorial Edit</v-toolbar-title>
+        <v-toolbar-title>Course Edit</v-toolbar-title>
       </v-toolbar>
       <br />
       <h4>{{ message }}</h4>
@@ -107,7 +107,7 @@ onMounted(() => {
           :disabled="!valid"
           color="success"
           class="mr-4"
-          @click="updateTutorial()"
+          @click="updateCourse()"
         >
           Save
         </v-btn>
