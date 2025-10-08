@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import CoursesList from "./views/CoursesList.vue";
 import EditCourse from "./views/EditCourse.vue";
 import AddCourse from "./views/AddCourse.vue";
-import ViewCourse from "./views/ViewCourse.vue";
 import HomeView from "./views/HomeView.vue";
 
 const router = createRouter({
@@ -28,12 +27,6 @@ const router = createRouter({
       path: "/add",
       name: "add",
       component: AddCourse,
-    },
-    {
-      path: "/view/:id",
-      name: "view",
-      component: ViewCourse,
-      props: true,
     },
   ],
 });
