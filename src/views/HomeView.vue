@@ -1,5 +1,5 @@
 <script setup>
-import TutorialServices from "../services/tutorialServices";
+import CourseServices from "../services/courseServices";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -8,8 +8,8 @@ const courses = ref([]);
 const message = ref("Course Homepage");
 
 
-const retrieveTutorials = () => {
-  TutorialServices.getAll()
+const retrieveCourses = () => {
+  CourseServices.getAll()
     .then((response) => {
       courses.value = response.data;
     })
@@ -18,7 +18,7 @@ const retrieveTutorials = () => {
     });
 };
 
-retrieveTutorials();
+retrieveCourses();
 </script>
 
 <template>
@@ -38,7 +38,7 @@ retrieveTutorials();
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in tutorials" :key="item.title">
+              <tr v-for="(item, index) in courses" :key="item.title">
               <td>{{ item.dept }}</td>
               <td>{{ item.name }}</td>
               </tr>
