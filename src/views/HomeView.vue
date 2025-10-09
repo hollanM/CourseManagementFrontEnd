@@ -69,21 +69,26 @@ retrieveCourses();
             </thead>
             <tbody>
               <tr v-for="(item, index) in limitCourses" :key="item.id">
+              <!-- Department -->
               <td>{{ item.dept }}</td>
-              <td 
-                style="position: relative;"
-                @mouseenter="hoveredCourse.value = item.id"
-                @mouseleave="hoveredCourse.value = null"
-              >
-                {{ item.name }}
 
-                <!-- Modal shows on hover -->
+              <!-- Name with hover modal -->
+              <td style="position: relative;">
+                <span
+                  style="cursor: pointer;"
+                  @mouseenter="hoveredCourse.value = item.id"
+                  @mouseleave="hoveredCourse.value = null"
+                >
+                  {{ item.name }}
+                </span>
                 <CourseModal 
                   v-if="hoveredCourse.value === item.id" 
                   :course="item" 
                   :show="true" 
                 />
               </td>
+
+              <!-- Delete icon -->
               <td>
                 <div style="display: flex; align-items: center;">
                   <v-icon small class="mx-4" @click="deleteCourse(item)">
@@ -91,8 +96,8 @@ retrieveCourses();
                   </v-icon>
                 </div>
               </td>
+            </tr>
 
-              </tr> 
             </tbody>
           </v-table> 
       </v-card>
