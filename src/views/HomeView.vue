@@ -28,15 +28,7 @@ const limitCourses = computed(() => {
   return filteredCourses.value.slice(start, end);
 });
 
-const deleteCourse = (course) => {
-  CourseServices.delete(course.id)
-    .then(() => {
-      retrieveCourses();
-    })
-    .catch((e) => {
-      message.value = e.response.data.message;
-    });
-};
+
 
 const retrieveCourses = () => {
   CourseServices.getAll()
@@ -91,9 +83,7 @@ retrieveCourses();
               <!-- Delete icon -->
               <td>
                 <div style="display: flex; align-items: center;">
-                  <v-icon small class="mx-4" @click="deleteCourse(item)">
-                    mdi-trash-can
-                  </v-icon>
+                 
                 </div>
               </td>
             </tr>
