@@ -3,6 +3,7 @@ import CourseServices from "../services/courseServices";
 import { ref } from "vue";
 import { computed, watch } from "vue";
 import { useRouter } from "vue-router";
+import courseServices from "../services/courseServices";
 
 const router = useRouter();
 const courses = ref([]);
@@ -64,11 +65,19 @@ const retrieveCourses = () => {
 };
 
 const addToHome = (item) => {
-  TutorialServices.get(item.id)
-    return courses.value.filter((item) =>
-      item.dept,
-      item.name
-  );
+  const data = {
+    dept: course.value.dept,
+    name: course.value.name,
+  };
+   CourseServices.create(data)
+    .then((response) => {
+      course.value.id = response.data.id;
+      console.log("courses " + response.data);
+      router.push({ name: "home" });
+    })
+    .catch((e) => {
+      message.value = e.response.data.message;
+    });
 };
 
 retrieveCourses();
