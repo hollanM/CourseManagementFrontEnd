@@ -47,7 +47,7 @@ retrieveCourses();
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in courses" :key="item.title">
+              <tr v-for="(item, index) in courses" :key="item.id">
               <td>{{ item.dept }}</td>
               <td>{{ item.name }}</td>
                 <td>
@@ -61,7 +61,6 @@ retrieveCourses();
             </tbody>
           </v-table> 
         <v-pagination v-model="page":length="Math.ceil(filteredCourses.length / itemsPerPage)"class="mt-4"/>
-
       </v-card>
     </v-container>
   </div>
