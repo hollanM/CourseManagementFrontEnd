@@ -63,9 +63,7 @@ retrieveCourses();
               <td>{{ item.name }}</td>
               <td>
                 <div style="display: flex; align-items: center;">
-                  <v-icon small class="mx-4" @click="deleteHomeCourse(item)">
-                    mdi-trash-can
-                  </v-icon>
+                 
                 </div>
               </td>
               </tr> 
