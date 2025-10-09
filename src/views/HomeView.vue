@@ -1,6 +1,6 @@
 <script setup>
 import CourseServices from "../services/courseServices";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import CourseModal from "../components/CourseModal.vue";
 const hoveredCourse = ref(null);
@@ -10,6 +10,17 @@ const courses = ref([]);
 const message = ref("My Classes");
 const page = ref(1);
 const itemsPerPage = ref(6);
+
+const search = ref("");
+
+const filteredCourses = computed(() => {
+  const query = search.value.toLowerCase();
+  return courses.value.filter((item) =>
+    item.dept.toLowerCase().includes(query) ||
+    item.name.toLowerCase().includes(query)
+  );
+});
+
 
 const limitCourses = computed(() => {
   const start = (page.value - 1) * itemsPerPage.value;
@@ -84,7 +95,6 @@ retrieveCourses();
               </tr> 
             </tbody>
           </v-table> 
-        
       </v-card>
     </v-container>
   </div>
