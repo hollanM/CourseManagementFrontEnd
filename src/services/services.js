@@ -2,9 +2,9 @@ import axios from "axios";
 
 var baseurl = "";
 if (import.meta.env.DEV) {
-  baseurl =  "http://localhost:3102/tutorial-simple"   //"http://localhost/course-management";
+  baseurl =  "https://localhost:3018/course-t8"   //"https://localhost/course-management";
 } else {
-  baseurl = "/course-management/tutorial-simple";
+  baseurl = "https://project2.eaglesoftwareteam.com/course-t8";
 }
 
 const apiClient = axios.create({

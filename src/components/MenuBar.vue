@@ -1,8 +1,8 @@
 <script setup>
-import ocLogo from "/oc-logo-white.png";
+import ocLogo from "/ocLogoWhiteText.png";
 import { ref, onMounted } from "vue";
 
-const title = ref("Courses");
+
 
 const name = ref("");
 const logoURL = ref("");
@@ -15,8 +15,8 @@ onMounted(() => {
 
 <template>
   <div>
-    <v-app-bar app>
-      <router-link :to="{ name: 'tutorials' }">
+    <v-app-bar app style="background-color: #7A0019;">
+      <router-link :to="{ name: 'home' }">
         <v-img
           class="mx-2"
           :src="logoURL"
@@ -25,13 +25,13 @@ onMounted(() => {
           contain
         ></v-img>
       </router-link>
-      <v-toolbar-title class="title">
+      <v-toolbar-title style="color: white;" class="title">
         {{ title }}
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div >
-        <v-btn class="mx-2" :to="{ name: 'tutorials' }"> List </v-btn>
-        <v-btn class="mx-2" :to="{ name: 'add' }"> Add Course </v-btn>
+        <v-btn class="mx-2 text-white" :to="{ name: 'courses' }"> List </v-btn>
+        <v-btn class="mx-2 text-white" :to="{ name: 'add' }"> Add Course </v-btn>
       </div>
 
     </v-app-bar>
