@@ -6,6 +6,14 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const courses = ref([]);
 const message = ref("My Classes");
+const page = ref(1);
+const itemsPerPage = ref(6);
+
+const limitCourses = computed(() => {
+  const start = (page.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return filteredCourses.value.slice(start, end);
+});
 
 const deleteCourse = (course) => {
   CourseServices.delete(course.id)
@@ -47,10 +55,10 @@ retrieveCourses();
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in courses" :key="item.id">
+              <tr v-for="(item, index) in limitCourses" :key="item.id">
               <td>{{ item.dept }}</td>
               <td>{{ item.name }}</td>
-                <td>
+              <td>
                 <div style="display: flex; align-items: center;">
                   <v-icon small class="mx-4" @click="deleteCourse(item)">
                     mdi-trash-can
@@ -60,7 +68,7 @@ retrieveCourses();
               </tr> 
             </tbody>
           </v-table> 
-        <v-pagination v-model="page":length="Math.ceil(filteredCourses.length / itemsPerPage)"class="mt-4"/>
+        
       </v-card>
     </v-container>
   </div>
