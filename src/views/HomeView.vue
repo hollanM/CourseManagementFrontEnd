@@ -2,6 +2,8 @@
 import CourseServices from "../services/courseServices";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import CourseModal from "../components/CourseModal.vue";
+const hoveredCourse = ref(null);
 
 const router = useRouter();
 const courses = ref([]);
@@ -57,7 +59,20 @@ retrieveCourses();
             <tbody>
               <tr v-for="(item, index) in limitCourses" :key="item.id">
               <td>{{ item.dept }}</td>
-              <td>{{ item.name }}</td>
+              <td 
+                style="position: relative;"
+                @mouseenter="hoveredCourse.value = item.id"
+                @mouseleave="hoveredCourse.value = null"
+              >
+                {{ item.name }}
+
+                <!-- Modal shows on hover -->
+                <CourseModal 
+                  v-if="hoveredCourse.value === item.id" 
+                  :course="item" 
+                  :show="true" 
+                />
+              </td>
               <td>
                 <div style="display: flex; align-items: center;">
                   <v-icon small class="mx-4" @click="deleteCourse(item)">
@@ -65,6 +80,7 @@ retrieveCourses();
                   </v-icon>
                 </div>
               </td>
+
               </tr> 
             </tbody>
           </v-table> 
